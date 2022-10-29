@@ -22,6 +22,7 @@ export default function Navigation() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         style={{color: "white", fontWeight: "bold"}}
+        variant="contained"
       >
         Dashboard
       </Button>
