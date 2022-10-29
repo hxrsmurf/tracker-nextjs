@@ -11,9 +11,9 @@ import { Container } from '@mui/material';
 function MyApp({ Component, pageProps: session, ...pageProps }) {
   return (
     <SessionProvider session={ session }>
-      <Container>
+      <Container style={{ marginTop: "2rem"}}>
         <Navigation/>
-        <Component {...pageProps}/>
+        <Component {...pageProps} style={{marginTop: "2rem"}}/>
       </Container>
     </SessionProvider>
   )
