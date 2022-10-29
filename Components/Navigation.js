@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
+import LoginButton from "./LoginButton";
 
 export default function Navigation() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -44,7 +45,7 @@ export default function Navigation() {
           </Menu>
         </Grid>
         <Grid item>
-          <Button variant="contained">Login</Button>
+          <LoginButton/>
         </Grid>
       </Grid>
     </div>
