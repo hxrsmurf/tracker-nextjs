@@ -6,12 +6,15 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { Container } from '@mui/material';
 
 function MyApp({ Component, pageProps: session, ...pageProps }) {
   return (
     <SessionProvider session={ session }>
-      <Navigation/>
-      <Component {...pageProps}/>
+      <Container>
+        <Navigation/>
+        <Component {...pageProps}/>
+      </Container>
     </SessionProvider>
   )
 }
