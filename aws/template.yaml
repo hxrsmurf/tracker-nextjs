@@ -15,3 +15,15 @@ Resources:
           KeyType: HASH
         - AttributeName: user
           KeyType: RANGE
+
+  User:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Policies:
+        - PolicyName: DynamoDB
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'dynamodb:*'
+                Resource: !GetAtt Table.Arn
