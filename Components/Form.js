@@ -1,11 +1,13 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import { useState } from "react";
 
 export default function BasicTextFields({ type, user }) {
-  if (!user) return "Nothing";
-
+  const [data, setData] = useState();
+  const handleSubmit = (event) => {
+    console.log(event)
+  };
   return (
     <Box
       component="form"
@@ -23,8 +25,17 @@ export default function BasicTextFields({ type, user }) {
         variant="outlined"
         defaultValue={user}
       />
-      <TextField id="data" label="Data" variant="outlined" />
-      <Button style={{ marginTop: "1rem" }} variant="contained">
+      <TextField
+        id="data"
+        label="Data"
+        variant="outlined"
+        onChange={(event) => setData(event.target.value)}
+      />
+      <Button
+        style={{ marginTop: "1rem" }}
+        variant="contained"
+        onClick={() => handleSubmit(data)}
+      >
         Submit
       </Button>
     </Box>
