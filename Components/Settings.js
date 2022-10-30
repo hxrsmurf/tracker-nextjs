@@ -1,11 +1,29 @@
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  Divider,
+  Fab,
+  List,
+  ListItem,
+  ListItemText,
+  Modal,
+  Typography,
+} from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import AddCategory from "./Forms/AddCategory";
+import { ExpandMore } from "@mui/icons-material";
 
 export default function Settings() {
   const { data: session } = useSession();
   if (!session) return <>Loading...</>;
 
   const [data, setData] = useState();
+  const [showFormModal, setShowFormModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,12 +32,58 @@ export default function Settings() {
       );
       const res = await req.json();
       setData(res);
-      console.log(res);
     };
     fetchData();
-  }, []);
+  }, [showFormModal]);
 
   if (!data) return <>Loading...</>;
 
-  return <>Settings page...</>;
+  // Modal
+
+  const handleShowFormModal = () => {
+    setShowFormModal(true);
+  };
+
+  const handleHideFormModal = () => {
+    setShowFormModal(false);
+  };
+
+  return (
+    <>
+      <div style={{ marginTop: "2rem" }}>
+        <AddCategory
+          show={showFormModal}
+          handleHideFormModal={handleHideFormModal}
+        />
+
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMore />}>
+            <div>Categories</div>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Fab
+              size="small"
+              color="primary"
+              style={{ marginLeft: "1rem" }}
+              onClick={handleShowFormModal}
+              variant="extended"
+            >
+              <AddIcon sx={{ mr: 1 }} />
+              <div style={{ marginRight: "1rem" }}>Add</div>
+            </Fab>
+            <List>
+              {data.map((d, id) => (
+                <>
+                  <ListItem>
+                    <ListItemText>{d.category.S}</ListItemText>
+                  </ListItem>
+                  <Divider></Divider>
+                </>
+              ))}
+            </List>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+    </>
+  );
 }

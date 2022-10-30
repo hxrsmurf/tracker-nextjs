@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { Button, Grid } from "@mui/material";
 import { useRouter } from "next/router";
 
-export default function CatagoryListing() {
+export default function CategoryListing() {
   const { data: session } = useSession();
   const [data, setData] = useState();
   const router = useRouter();
@@ -18,14 +18,13 @@ export default function CatagoryListing() {
       );
       const res = await req.json();
       setData(res);
-      console.log(res);
     };
     fetchData();
   }, []);
 
   if (!data) return <>Loading...</>;
 
-  const handleCatagoryClick = (event) => {
+  const handleCategoryClick = (event) => {
     router.push("/" + event.target.textContent);
   };
 
@@ -36,9 +35,9 @@ export default function CatagoryListing() {
             <Button
               variant="contained"
               style={{ marginRight: "1rem" }}
-              onClick={(event) => handleCatagoryClick(event)}
+              onClick={(event) => handleCategoryClick(event)}
             >
-              {data.catagory.S}
+              {data.category.S}
             </Button>
           </Grid>
         ))}

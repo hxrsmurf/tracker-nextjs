@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import CatagoryListing from "./CatagoryListing";
+import CategoryListing from "./CategoryListing";
 import LoginButton from "./LoginButton";
 
 export default function Navigation() {
@@ -43,7 +43,7 @@ export default function Navigation() {
           <></>
         ) : (
           <>
-            <CatagoryListing />
+            <CategoryListing />
           </>
         )}
         <Grid item>
