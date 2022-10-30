@@ -25,7 +25,7 @@ export default function CategoryListing() {
   if (!data) return <>Loading...</>;
 
   const handleCategoryClick = (event) => {
-    router.push("/" + event.target.textContent);
+    router.push("/categories/" + event.target.textContent);
   };
 
   return (
