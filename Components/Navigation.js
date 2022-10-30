@@ -8,7 +8,7 @@ export default function Navigation() {
   const { data: session } = useSession();
   return (
     <>
-      <Grid container>
+      <Grid container spacing={2}>
       {!session ? <></> : <MenuItems session={session}/>}
         <Grid item>
           <LoginButton session={session} />
