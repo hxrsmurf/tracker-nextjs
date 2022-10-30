@@ -22,6 +22,8 @@ export default function ListMovies({ session }) {
 
   if (!data) return <p>Loading...</p>;
 
+  const sorted_data = data.sort(function(a,b) { return b.id - a.id})
+
   return (
     <>
       <Table style={{ background: "white", marginTop: "2rem" }}>
@@ -34,7 +36,7 @@ export default function ListMovies({ session }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((result, id) => (
+          {sorted_data.map((result, id) => (
             <TableRow key={id}>
               <TableCell>{result.email.S}</TableCell>
               <TableCell>{result.id.S}</TableCell>

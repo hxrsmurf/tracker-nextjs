@@ -61,7 +61,7 @@ export default async function handler(req, res) {
       {
         TableName: process.env.TABLE_NAME,
         Limit: 10,
-        ScanIndexForward: false,
+        ScanIndexForward: true,
         KeyConditionExpression: "email = :value",
         ExpressionAttributeValues: {
           ":value": {
