@@ -2,15 +2,11 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
-  Button,
   Divider,
   Fab,
   List,
   ListItem,
-  ListItemText,
-  Modal,
-  Typography,
+  ListItemText
 } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
