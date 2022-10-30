@@ -10,13 +10,13 @@ import Logout from "@mui/icons-material/Logout";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Settings } from "@mui/icons-material";
 
 export default function AccountMenu() {
   const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const router = useRouter()
-
+  const router = useRouter();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,9 +25,9 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const handleClickMyAccount = () => {
-    router.push('/profile')
-  }
+  const handleClickSettings = () => {
+    router.push("/settings");
+  };
 
   return (
     <>
@@ -82,8 +82,12 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem onClick={() => handleClickMyAccount()}>My account</MenuItem>
+        <MenuItem onClick={() => handleClickSettings()}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
         <Divider />
         <MenuItem onClick={() => signOut()}>
           <ListItemIcon>

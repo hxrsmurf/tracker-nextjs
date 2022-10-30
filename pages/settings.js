@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Profile from "../Components/Profile";
+import Settings from "../Components/Settings";
 
 export default function profile() {
   const { data: session } = useSession();
@@ -16,9 +16,9 @@ export default function profile() {
   return (
     <>
       <div>
-        Profile for {session.user.name} | {session.user.email}
+        Settings for {session.user.name} | {session.user.email}
       </div>
-      <Profile />
+      <Settings />
     </>
   );
 }
