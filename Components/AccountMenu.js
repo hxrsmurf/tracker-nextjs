@@ -1,4 +1,5 @@
-import { Logout, Settings } from "@mui/icons-material";
+import Logout from "@mui/icons-material/Logout"
+import SettingsIcon from '@mui/icons-material/Settings';
 import {
   Avatar,
   Box,
@@ -23,6 +24,7 @@ export default function AccountMenu({ session }) {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(event);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -34,9 +36,28 @@ export default function AccountMenu({ session }) {
 
   return (
     <>
-      <Avatar sx={{ width: 48, height: 48 }} src={session.user.image}>
+      <Avatar
+        sx={{ width: 48, height: 48 }}
+        src={session.user.image}
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+      >
         {session.user.name.charAt(0)}
       </Avatar>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <MenuItem onClick={handleClose}><SettingsIcon fontSize="small" style={{marginRight: "1rem"}} />Settings</MenuItem>
+        <MenuItem onClick={handleClose}><Logout fontSize="small" style={{marginRight: "1rem"}}/>Logout</MenuItem>
+      </Menu>
     </>
   );
 }
