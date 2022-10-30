@@ -18,7 +18,6 @@ export default function CategoryListing() {
       );
       const res = await req.json();
       setData(res);
-      console.log(res);
     };
     fetchData();
   }, []);

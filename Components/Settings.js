@@ -32,7 +32,6 @@ export default function Settings() {
       );
       const res = await req.json();
       setData(res);
-      console.log(res);
     };
     fetchData();
   }, [showFormModal]);
@@ -42,7 +41,6 @@ export default function Settings() {
   // Modal
 
   const handleShowFormModal = () => {
-    console.log("Show form");
     setShowFormModal(true);
   };
 

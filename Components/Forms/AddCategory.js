@@ -25,7 +25,6 @@ export default function AddCategory({ show, handleHideFormModal }) {
         const data_type = "&type=category"
         const res = await fetch("/api/db/DBUserProfile?" + data_user + data_event + data_type, { method: 'PUT'})
         const req = await res.json()
-        console.log(req)
     }
     submitData()
     handleHideFormModal()
