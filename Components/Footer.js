@@ -1,3 +1,9 @@
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { Grid } from "@mui/material";
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <div
@@ -9,8 +15,25 @@ export default function Footer() {
       }}
     >
       <hr style={{ width: "25%" }}></hr>
-      <div style={{marginTop: "1rem", marginBottom: "1rem"}}>YouTube | Twitter | GitHub | Discord</div>
-      <div>Privacy | Terms</div>
+      <Grid
+        style={{ marginTop: 0, marginBottom: "1rem", textAlign: "center" }}
+        justifyContent="center"
+        container
+        spacing={2}
+      >
+        <Grid item>
+          <YouTubeIcon />
+        </Grid>
+        <Grid item>
+          <TwitterIcon />
+        </Grid>{" "}
+        <Grid item>
+          <GitHubIcon />
+        </Grid>
+      </Grid>
+      <Grid>
+        <Grid item><Link href="/privacy">Privacy Policy</Link></Grid>
+      </Grid>
     </div>
   );
 }
