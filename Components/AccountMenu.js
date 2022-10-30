@@ -3,13 +3,9 @@ import Logout from "@mui/icons-material/Logout";
 import SettingsIcon from "@mui/icons-material/Settings";
 import {
   Avatar,
-  Box,
   Divider,
-  IconButton,
-  ListItemIcon,
   Menu,
   MenuItem,
-  Tooltip,
 } from "@mui/material";
 
 import { signOut } from "next-auth/react";
@@ -45,7 +41,7 @@ export default function AccountMenu({ session }) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        onHover={console.log("kevin")}
+        style={{ cursor: "pointer" }}
       >
         {session.user.name.charAt(0)}
       </Avatar>
