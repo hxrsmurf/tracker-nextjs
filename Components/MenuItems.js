@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 //  "/api/db/DBUserProfile?ref=list&user=" + session.user.email
@@ -14,6 +15,7 @@ import { useEffect, useState } from "react";
 export default function MenuItems({ session, type }) {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     setLoading(true);

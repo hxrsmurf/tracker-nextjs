@@ -1,15 +1,20 @@
 import {
+  Button,
+  Grid,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function ListCategory({ session, type }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
+  const router = useRouter()
+
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
