@@ -1,5 +1,7 @@
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+
 import { useEffect, useState } from "react";
-import { Button, Grid } from "@mui/material";
 import { useRouter } from "next/router";
 
 export default function CategoryListing({ session }) {
