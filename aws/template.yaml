@@ -16,6 +16,21 @@ Resources:
         - AttributeName: epoch
           KeyType: RANGE
 
+  TableUser:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: epoch
+          AttributeType: S
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+        - AttributeName: epoch
+          KeyType: RANGE
+
   User:
     Type: 'AWS::IAM::User'
     Properties:
