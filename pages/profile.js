@@ -1,6 +1,6 @@
-import { Table, TableBody, TableCell, TableHead } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Profile from "../Components/Profile";
 
 export default function profile() {
   const { data: session } = useSession();
@@ -18,16 +18,7 @@ export default function profile() {
       <div>
         Profile for {session.user.name} | {session.user.email}
       </div>
-      <div>
-        <Table style={{ background: "white", marginTop: "2rem" }}>
-          <TableHead>
-            <TableCell>Catagory</TableCell>
-          </TableHead>
-          <TableBody>
-            <TableCell>Example Catagory</TableCell>
-          </TableBody>
-        </Table>
-      </div>
+      <Profile />
     </>
   );
 }
