@@ -6,8 +6,13 @@ import { useState } from "react";
 export default function BasicTextFields({ type, user }) {
   const [data, setData] = useState();
   const handleSubmit = (event) => {
-    console.log(event)
+    async function submit(event) {
+        const res = await fetch("/api/dynamodb?user=" + user + "&data=" + event, { method: 'PUT'})
+        const resp = await res.json()
+    }
+    submit(event)
   };
+
   return (
     <Box
       component="form"

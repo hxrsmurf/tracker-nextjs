@@ -19,6 +19,12 @@ export default async function handler(req, res) {
     });
   }
 
+  if (req.method === "PUT"){
+    const user = req.query.user
+    const data = req.query.data
+    console.log(data)
+    return res.status(200)
+  }
 
   if (req.method === "GET") {
     client.query(
