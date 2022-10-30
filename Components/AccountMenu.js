@@ -1,7 +1,6 @@
-
 // It was the icons...
-import Logout from "@mui/icons-material/Logout"
-import SettingsIcon from '@mui/icons-material/Settings';
+import Logout from "@mui/icons-material/Logout";
+import SettingsIcon from "@mui/icons-material/Settings";
 import {
   Avatar,
   Box,
@@ -12,6 +11,7 @@ import {
   MenuItem,
   Tooltip,
 } from "@mui/material";
+
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -45,6 +45,7 @@ export default function AccountMenu({ session }) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        onHover={console.log("kevin")}
       >
         {session.user.name.charAt(0)}
       </Avatar>
@@ -57,8 +58,15 @@ export default function AccountMenu({ session }) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}><SettingsIcon fontSize="small" style={{marginRight: "1rem"}} />Settings</MenuItem>
-        <MenuItem onClick={handleClose}><Logout fontSize="small" style={{marginRight: "1rem"}}/>Logout</MenuItem>
+        <MenuItem onClick={() => handleClickSettings()}>
+          <SettingsIcon fontSize="small" style={{ marginRight: "1rem" }} />
+          Settings
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={() => signOut()}>
+          <Logout fontSize="small" style={{ marginRight: "1rem" }} />
+          Logout
+        </MenuItem>
       </Menu>
     </>
   );
