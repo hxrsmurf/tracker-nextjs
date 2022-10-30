@@ -22,10 +22,6 @@ export default function ListMovies({ session, type }) {
 
   if (!data) return <p>Loading...</p>;
 
-  const sorted_data = data.sort(function (a, b) {
-    return b.epoch - a.epoch;
-  });
-
   return (
     <>
       <Table style={{ background: "white", marginTop: "2rem" }}>
@@ -34,10 +30,12 @@ export default function ListMovies({ session, type }) {
             <TableCell>data</TableCell>
             <TableCell>type</TableCell>
             <TableCell>date_utc</TableCell>
+            <TableCell>time_utc</TableCell>
+            <TableCell>epoch</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {sorted_data
+          {data
             .filter(function (result) {
               return result.type.S == type;
             })
@@ -46,6 +44,8 @@ export default function ListMovies({ session, type }) {
                 <TableCell>{result.data.S}</TableCell>
                 <TableCell>{result.type.S}</TableCell>
                 <TableCell>{result.date_utc.S}</TableCell>
+                <TableCell>{result.time_utc.S}</TableCell>
+                <TableCell>{result.epoch.S}</TableCell>
               </TableRow>
             ))}
         </TableBody>
