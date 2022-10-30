@@ -21,7 +21,7 @@ export default function Home() {
           </div>
         </div>
 
-        <hr style={{marginTop: "2rem"}}></hr>
+        <hr style={{ marginTop: "2rem" }}></hr>
 
         <div>
           <h1>How do I use this?</h1>
@@ -31,7 +31,7 @@ export default function Home() {
           </div>
         </div>
 
-        <hr style={{marginTop: "2rem"}}></hr>
+        <hr style={{ marginTop: "2rem" }}></hr>
 
         <div>
           <h1>Data Collected</h1>
