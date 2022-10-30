@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       {
         TableName: process.env.TABLE_NAME,
         Item: {
-          user: {
+          email: {
             S: user,
           },
           id: {
@@ -54,23 +54,24 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "GET") {
+
+    const user = req.query.user
+
     client.query(
       {
         TableName: process.env.TABLE_NAME,
         Limit: 10,
         ScanIndexForward: false,
-        KeyConditionExpression: "id = :value",
+        KeyConditionExpression: "email = :value",
         ExpressionAttributeValues: {
           ":value": {
-            S: "1234",
+            S: user,
           },
         },
       },
       function (err, data) {
         if (err) console.log(err, err.stack);
-        else {
-          return res.status(200).json(data.Items);
-        }
+        else return res.status(200).json(data.Items);
       }
     );
   }
