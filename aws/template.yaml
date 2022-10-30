@@ -1,6 +1,8 @@
 # CFT Name: personal-tracker-nextjs
 Description: Personal Tracking - NextJS
 Resources:
+
+# Production
   Table:
     Type: 'AWS::DynamoDB::Table'
     Properties:
@@ -44,3 +46,48 @@ Resources:
                 Resource:
                     - !GetAtt Table.Arn
                     - !GetAtt TableUser.Arn
+
+# Test
+  TestTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: epoch
+          AttributeType: S
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+        - AttributeName: epoch
+          KeyType: RANGE
+
+  TestTableUser:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: epoch
+          AttributeType: S
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+        - AttributeName: epoch
+          KeyType: RANGE
+
+  TestUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Policies:
+        - PolicyName: DynamoDB
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'dynamodb:*'
+                Resource:
+                    - !GetAtt TestTable.Arn
+                    - !GetAtt TestTableUser.Arn
