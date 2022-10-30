@@ -1,18 +1,20 @@
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function profile() {
   const { data: session } = useSession();
+  const router = useRouter();
   if (!session) {
-    console.log("No session");
+    router.push("/");
     return <>Loading...</>;
-  } else if (!session.user) {
-    console.log("no session user");
+  }
+  if (!session.user) {
     return <>Loading...</>;
   }
 
   return (
     <>
-      <div style={{ marginTop: "2rem" }}>Profile Page for user.</div>
+      <div>Profile page for {session.user.name}</div>
     </>
   );
 }
