@@ -8,10 +8,4 @@ export default function LoginButton({ session }) {
         Login
       </Button>
     );
-
-  return (
-    <Button variant="contained" onClick={() => signOut()}>
-      Logout
-    </Button>
-  );
 }
