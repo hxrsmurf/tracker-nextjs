@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+
 import Form from "../Components/Form";
 import ListMovies from "../Components/ListMovies";
 
@@ -18,7 +19,7 @@ export default function movies(props) {
       </div>
 
       <div>Movies</div>
-      <ListMovies session={session} type="movie"/>
+      <ListMovies session={session} type="movie" />
     </>
   );
 }
