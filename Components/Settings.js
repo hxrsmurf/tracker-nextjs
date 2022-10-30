@@ -1,4 +1,13 @@
-import { Box, Button, Fab, Modal, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Fab,
+  List,
+  ListItem,
+  ListItemText,
+  Modal,
+  Typography,
+} from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
@@ -21,7 +30,7 @@ export default function Settings() {
       console.log(res);
     };
     fetchData();
-  }, []);
+  }, [showFormModal]);
 
   if (!data) return <>Loading...</>;
 
@@ -39,7 +48,6 @@ export default function Settings() {
   return (
     <>
       <div style={{ marginTop: "2rem" }}>
-
         <AddCategory
           show={showFormModal}
           handleHideFormModal={handleHideFormModal}
@@ -56,10 +64,14 @@ export default function Settings() {
             <AddIcon />
           </Fab>
         </div>
-        <ul>
-          {data.map((d, id) => {
-            <li>{d.catagories.S}</li>;
-          })}
+        <ul style={{ color: "white" }}>
+          {data.map((d, id) => (
+            <List key={id}>
+              <ListItem>
+                <ListItemText primary={d.category.S} />
+              </ListItem>
+            </List>
+          ))}
         </ul>
       </div>
     </>

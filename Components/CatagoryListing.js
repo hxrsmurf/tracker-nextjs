@@ -38,7 +38,7 @@ export default function CatagoryListing() {
               style={{ marginRight: "1rem" }}
               onClick={(event) => handleCatagoryClick(event)}
             >
-              {data.catagory.S}
+              {data.category.S}
             </Button>
           </Grid>
         ))}
