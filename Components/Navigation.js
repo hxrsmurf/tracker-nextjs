@@ -1,5 +1,6 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { useSession } from "next-auth/react";
+
 import AccountMenu from "./AccountMenu";
 import LoginButton from "./LoginButton";
 import MenuItems from "./MenuItems";

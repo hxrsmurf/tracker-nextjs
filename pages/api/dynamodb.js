@@ -1,7 +1,8 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import { stringify, v4 as uuidv4 } from "uuid";
+
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
-import { stringify, v4 as uuidv4 } from "uuid";
 
 const client = new DynamoDB({
   credentials: {
@@ -25,10 +26,9 @@ export default async function handler(req, res) {
     const data = req.query.data;
     const type = req.query.type;
     const unique_id = uuidv4();
-    const now_date = new Date().toISOString()
-    const save_date = now_date.split('T')[0]
-    const save_time = now_date.split('T')[1]
-
+    const now_date = new Date().toISOString();
+    const save_date = now_date.split("T")[0];
+    const save_time = now_date.split("T")[1];
 
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html#updateItem-property
     client.putItem(
@@ -48,14 +48,14 @@ export default async function handler(req, res) {
             S: data,
           },
           epoch: {
-            S: Date.now().toString()
+            S: Date.now().toString(),
           },
           date_utc: {
-            S: save_date
+            S: save_date,
           },
           time_utc: {
-            S: save_time
-          }
+            S: save_time,
+          },
         },
       },
       function (err, data) {
@@ -68,8 +68,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-
-    const user = req.query.user
+    const user = req.query.user;
 
     client.query(
       {

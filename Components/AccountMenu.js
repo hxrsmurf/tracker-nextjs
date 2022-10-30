@@ -1,12 +1,11 @@
 // It was the icons...
 import Logout from "@mui/icons-material/Logout";
 import SettingsIcon from "@mui/icons-material/Settings";
-import {
-  Avatar,
-  Divider,
-  Menu,
-  MenuItem,
-} from "@mui/material";
+
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
