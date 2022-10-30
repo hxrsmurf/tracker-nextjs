@@ -8,7 +8,13 @@ export default function categoryPage() {
   const { data: session } = useSession();
   const { category } = router.query;
 
-  if (!session.user) return <>Loading...</>;
+  if (!session) {
+    router.push("/");
+    return <>Loading...</>;
+  }
+  if (!session.user) {
+    return <>Loading...</>;
+  }
 
   return (
     <>
