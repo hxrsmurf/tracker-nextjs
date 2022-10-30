@@ -22,8 +22,6 @@ export default function ListCategory({ session, type }) {
 
   if (!data) return <p>Loading...</p>;
 
-  console.log(data.length)
-
   return (
     <>
       <Table style={{ background: "white", marginTop: "2rem" }}>
