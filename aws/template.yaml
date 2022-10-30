@@ -8,12 +8,12 @@ Resources:
       AttributeDefinitions:
         - AttributeName: email
           AttributeType: S
-        - AttributeName: id
+        - AttributeName: epoch
           AttributeType: S
       KeySchema:
         - AttributeName: email
           KeyType: HASH
-        - AttributeName: id
+        - AttributeName: epoch
           KeyType: RANGE
 
   User:
