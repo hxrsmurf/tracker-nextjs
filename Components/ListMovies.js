@@ -29,21 +29,17 @@ export default function ListMovies({ session }) {
       <Table style={{ background: "white", marginTop: "2rem" }}>
         <TableHead>
           <TableRow>
-            <TableCell>email</TableCell>
-            <TableCell>id</TableCell>
             <TableCell>data</TableCell>
             <TableCell>type</TableCell>
-            <TableCell>epoch</TableCell>
+            <TableCell>date_utc</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {sorted_data.map((result, id) => (
             <TableRow key={id}>
-              <TableCell>{result.email.S}</TableCell>
-              <TableCell>{result.id.S}</TableCell>
               <TableCell>{result.data.S}</TableCell>
               <TableCell>{result.type.S}</TableCell>
-              <TableCell>{result.epoch.S}</TableCell>
+              <TableCell>{result.date_utc.S}</TableCell>
             </TableRow>
           ))}
         </TableBody>

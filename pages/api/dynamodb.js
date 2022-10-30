@@ -24,6 +24,10 @@ export default async function handler(req, res) {
     const data = req.query.data;
     const type = req.query.type;
     const unique_id = uuidv4();
+    const now_date = new Date().toISOString()
+    const save_date = now_date.split('T')[0]
+    const save_time = now_date.split('T')[1]
+
 
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html#updateItem-property
     client.putItem(
@@ -44,6 +48,12 @@ export default async function handler(req, res) {
           },
           epoch: {
             S: Date.now().toString()
+          },
+          date_utc: {
+            S: save_date
+          },
+          time_utc: {
+            S: save_time
           }
         },
       },
