@@ -43,11 +43,11 @@ export default function Navigation() {
           <></>
         ) : (
           <>
-            <CategoryListing />
+            <CategoryListing session={session}/>
           </>
         )}
         <Grid item>
-          <LoginButton />
+          <LoginButton session={session} />
         </Grid>
       </Grid>
     </div>

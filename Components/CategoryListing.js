@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import { Button, Grid } from "@mui/material";
 import { useRouter } from "next/router";
 
-export default function CategoryListing() {
-  const { data: session } = useSession();
+export default function CategoryListing({ session }) {
   const [data, setData] = useState();
   const router = useRouter();
 
@@ -30,17 +28,17 @@ export default function CategoryListing() {
 
   return (
     <>
-        {data.map((data, id) => (
-          <Grid item key={id}>
-            <Button
-              variant="contained"
-              style={{ marginRight: "1rem" }}
-              onClick={(event) => handleCategoryClick(event)}
-            >
-              {data.category.S}
-            </Button>
-          </Grid>
-        ))}
+      {data.map((data, id) => (
+        <Grid item key={id}>
+          <Button
+            variant="contained"
+            style={{ marginRight: "1rem" }}
+            onClick={(event) => handleCategoryClick(event)}
+          >
+            {data.category.S}
+          </Button>
+        </Grid>
+      ))}
     </>
   );
 }
