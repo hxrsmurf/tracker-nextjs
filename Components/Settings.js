@@ -74,7 +74,7 @@ export default function Settings() {
             <List>
               {data.map((d, id) => (
                 <>
-                  <ListItem>
+                  <ListItem key={id}>
                     <ListItemText>{d.category.S}</ListItemText>
                   </ListItem>
                   <Divider></Divider>

@@ -17,7 +17,10 @@ export default function profile() {
   return (
     <>
       <div>
-        Settings for {session.user.name} | {session.user.email}
+        <p>
+          Settings for {session.user.name} | {session.user.email}
+        </p>
+        <p>You'll have to refresh the page to see new categories.</p>
       </div>
       <Settings />
     </>
