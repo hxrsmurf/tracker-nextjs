@@ -22,7 +22,7 @@ export default function ListMovies({ session }) {
 
   if (!data) return <p>Loading...</p>;
 
-  const sorted_data = data.sort(function(a,b) { return b.id - a.id})
+  const sorted_data = data.sort(function(a,b) { return b.epoch - a.epoch})
 
   return (
     <>
@@ -33,6 +33,7 @@ export default function ListMovies({ session }) {
             <TableCell>id</TableCell>
             <TableCell>data</TableCell>
             <TableCell>type</TableCell>
+            <TableCell>epoch</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,6 +43,7 @@ export default function ListMovies({ session }) {
               <TableCell>{result.id.S}</TableCell>
               <TableCell>{result.data.S}</TableCell>
               <TableCell>{result.type.S}</TableCell>
+              <TableCell>{result.epoch.S}</TableCell>
             </TableRow>
           ))}
         </TableBody>

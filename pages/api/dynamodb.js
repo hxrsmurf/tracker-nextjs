@@ -42,6 +42,9 @@ export default async function handler(req, res) {
           data: {
             S: data,
           },
+          epoch: {
+            S: Date.now().toString()
+          }
         },
       },
       function (err, data) {
