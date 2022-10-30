@@ -1,15 +1,17 @@
 import { Button } from "@mui/material";
-import { signIn } from "next-auth/react";
-import AccountMenu from "./AccountMenu";
+import { signIn, signOut } from "next-auth/react";
 
-export default function LoginButton({session}) {
-
-  if (!session) return <Button variant="contained" onClick={() => signIn()}>Login</Button>
-
-  // This is required as the session sometimes is null/undefined and caused issues with sub-component
-  if (session.user) return <AccountMenu/>
+export default function LoginButton({ session }) {
+  if (!session)
+    return (
+      <Button variant="contained" onClick={() => signIn()}>
+        Login
+      </Button>
+    );
 
   return (
-    <Button variant="contained" onClick={() => signIn()}>Login</Button>
-  )
+    <Button variant="contained" onClick={() => signOut()}>
+      Logout
+    </Button>
+  );
 }
