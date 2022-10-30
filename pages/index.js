@@ -7,7 +7,7 @@ export default function Home() {
     return (
       <>
         <div style={{ marginTop: "2rem" }}>
-          <div class="Text">
+          <div>
             <h1>Why?</h1>
             <p>
               I record various categories in my life like:

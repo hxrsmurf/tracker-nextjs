@@ -28,7 +28,7 @@ export default function Settings() {
   useEffect(() => {
     const fetchData = async () => {
       const req = await fetch(
-        "/api/db/DBUserProfile?user=" + session.user.email
+        "/api/db/DBUserProfile?ref=list&user=" + session.user.email
       );
       const res = await req.json();
       setData(res);
