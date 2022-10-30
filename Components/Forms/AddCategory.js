@@ -1,4 +1,4 @@
-import { Modal, Typography } from "@mui/material";
+import { Button, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 
@@ -14,6 +14,14 @@ const style = {
 };
 
 export default function AddCategory({ show, handleHideFormModal }) {
+  const [updateCategory, setupdateCategory] = useState();
+
+  const handleAdd = (event) => {
+    console.log(updateCategory);
+    handleHideFormModal()
+    setupdateCategory(null)
+  };
+
   return (
     <>
       <Modal open={show} onClose={handleHideFormModal}>
@@ -22,7 +30,25 @@ export default function AddCategory({ show, handleHideFormModal }) {
             Add a Category
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 1, width: "20ch" },
+                background: "white",
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                id="category"
+                label="category"
+                variant="outlined"
+                onChange={(event) => setupdateCategory(event.target.value)}
+              />
+              <Button variant="contained" onClick={() => handleAdd()}>
+                Add
+              </Button>
+            </Box>
           </Typography>
         </Box>
       </Modal>
