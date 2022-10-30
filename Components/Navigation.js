@@ -7,7 +7,7 @@ export default function Navigation() {
   const { data: session } = useSession();
   return (
     <>
-      <Grid>
+      <Grid container>
       {!session ? <></> : <MenuItems session={session}/>}
         <Grid item>
           <LoginButton session={session} />

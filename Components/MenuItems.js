@@ -1,4 +1,6 @@
 import {
+  Button,
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -7,53 +9,44 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
+//  "/api/db/DBUserProfile?ref=list&user=" + session.user.email
+
 export default function MenuItems({ session, type }) {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState();
-
-  return <>Menu Items</>
-
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    const fetchData = async () => {
-      const req = await fetch("/api/db/DBUserProfile?user=" + session.user.email);
-      const res = await req.json();
-      setData(res);
-    };
-    fetchData();
-  }, []);
+    if (session.user) {
+      fetch("/api/db/DBUserProfile?ref=list&user=" + session.user.email)
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data);
+          setLoading(false);
+        });
+    }
+  }, [session]);
 
-  if (!data) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No profile data</p>;
+
+  const handleCategoryClick = (event) => {
+    router.push("/categories/" + event.target.textContent);
+  };
 
   return (
     <>
-      <Table style={{ background: "white", marginTop: "2rem" }}>
-        <TableHead>
-          <TableRow>
-            <TableCell>data</TableCell>
-            <TableCell>type</TableCell>
-            <TableCell>date_utc</TableCell>
-            <TableCell>time_utc</TableCell>
-            <TableCell>epoch</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data
-            .filter(function (result) {
-              return result.type.S == type;
-            })
-            .map((result, id) => (
-              <TableRow key={id}>
-                <TableCell>{result.data.S}</TableCell>
-                <TableCell>{result.type.S}</TableCell>
-                <TableCell>{result.date_utc.S}</TableCell>
-                <TableCell>{result.time_utc.S}</TableCell>
-                <TableCell>{result.epoch.S}</TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
+      {data.map((data, id) => (
+        <Grid item key={id}>
+          <Button
+            variant="contained"
+            style={{ marginRight: "1rem" }}
+            onClick={(event) => handleCategoryClick(event)}
+          >
+            {data.category.S}
+          </Button>
+        </Grid>
+      ))}
     </>
   );
 }
