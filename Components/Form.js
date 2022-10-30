@@ -7,8 +7,12 @@ export default function BasicTextFields({ type, user }) {
   const [data, setData] = useState();
   const handleSubmit = (event) => {
     async function submit(event) {
-        const res = await fetch("/api/dynamodb?user=" + user + "&data=" + event, { method: 'PUT'})
+        const data_user = "user=" + user
+        const data_event = "&data=" + event
+        const data_type = "&type=" + type
+        const res = await fetch("/api/dynamodb?" + data_user + data_event + data_type, { method: 'PUT'})
         const resp = await res.json()
+        console.log(resp)
     }
     submit(event)
   };
