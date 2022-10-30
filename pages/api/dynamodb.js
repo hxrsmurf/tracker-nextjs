@@ -1,7 +1,8 @@
-import { DynamoDB } from "@aws-sdk/client-DynamoDB";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 import { stringify, v4 as uuidv4 } from "uuid";
+
 const client = new DynamoDB({
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY,
