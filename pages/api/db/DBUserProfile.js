@@ -59,10 +59,17 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
 
     const user = req.query.user
+    const ref = req.query.ref
+
+    if (ref == 'list') {
+      var table = process.env.TABLE_USER
+    } else {
+      var table = process.env.TABLE_NAME
+    }
 
     client.query(
       {
-        TableName: process.env.TABLE_USER,
+        TableName: table,
         ScanIndexForward: false,
         KeyConditionExpression: "email = :value",
         ExpressionAttributeValues: {
