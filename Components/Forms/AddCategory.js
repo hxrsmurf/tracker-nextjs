@@ -1,5 +1,6 @@
 import { Button, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
 const style = {
@@ -15,9 +16,18 @@ const style = {
 
 export default function AddCategory({ show, handleHideFormModal }) {
   const [updateCategory, setupdateCategory] = useState();
+  const {data: session} = useSession()
 
-  const handleAdd = (event) => {
-    console.log(updateCategory);
+  const handleAdd = () => {
+    const submitData = async () => {
+        const data_user = "user=" + session.user.email
+        const data_event = "&data=" + updateCategory
+        const data_type = "&type=category"
+        const res = await fetch("/api/db/DBUserProfile?" + data_user + data_event + data_type, { method: 'PUT'})
+        const req = await res.json()
+        console.log(req)
+    }
+    submitData()
     handleHideFormModal()
     setupdateCategory(null)
   };

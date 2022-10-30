@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
   if (req.method === "PUT") {
     const user = req.query.user;
-    const data = req.query.category;
+    const data = req.query.data;
     const type = req.query.type;
     const unique_id = uuidv4();
     const now_date = new Date().toISOString()
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
             S: type
           },
           category: {
-            S: category,
+            S: data,
           }
         },
       },
