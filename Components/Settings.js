@@ -1,6 +1,10 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
+  Divider,
   Fab,
   List,
   ListItem,
@@ -12,6 +16,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import AddCategory from "./Forms/AddCategory";
+import { ExpandMore } from "@mui/icons-material";
 
 export default function Settings() {
   const { data: session } = useSession();
@@ -53,26 +58,33 @@ export default function Settings() {
           handleHideFormModal={handleHideFormModal}
         />
 
-        <div>
-          Categories
-          <Fab
-            size="small"
-            color="primary"
-            style={{ marginLeft: "1rem" }}
-            onClick={handleShowFormModal}
-          >
-            <AddIcon />
-          </Fab>
-        </div>
-        <ul style={{ color: "white" }}>
-          {data.map((d, id) => (
-            <List key={id}>
-              <ListItem>
-                <ListItemText primary={d.category.S} />
-              </ListItem>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMore />}>
+            <div>Categories</div>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Fab
+              size="small"
+              color="primary"
+              style={{ marginLeft: "1rem" }}
+              onClick={handleShowFormModal}
+              variant="extended"
+            >
+              <AddIcon sx={{ mr: 1 }} />
+              <div style={{ marginRight: "1rem" }}>Add</div>
+            </Fab>
+            <List>
+              {data.map((d, id) => (
+                <>
+                  <ListItem>
+                    <ListItemText>{d.category.S}</ListItemText>
+                  </ListItem>
+                  <Divider></Divider>
+                </>
+              ))}
             </List>
-          ))}
-        </ul>
+          </AccordionDetails>
+        </Accordion>
       </div>
     </>
   );
