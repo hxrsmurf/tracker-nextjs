@@ -13,14 +13,14 @@ export default function Home() {
               I record various categories in my life like:
               <ul>
                 <li>What movies and tv I watch</li>
-                <li>What video games I've been playing</li>
+                <li>What video games I&apos;ve been playing</li>
                 <li>What weird dreams I have</li>
                 <li>What music I listen to via Spotify</li>
               </ul>
             </p>
             <p>
-              I thought it'd be a good idea to have a central "portal" for this.
-              I've been trying to learn more about programming/coding. I found
+              I thought it&apos;d be a good idea to have a central &apos;portal&apos; for this.
+              I&apos;ve been trying to learn more about programming/coding. I found
               that NextJS is easier for me to understand.
             </p>
           </div>
@@ -29,7 +29,7 @@ export default function Home() {
 
           <div>
             <h1>How do I use this?</h1>
-            <p>It's simple! Just click Login in the top-right. Then, select your Google account. You should be redirected back to this page.</p>
+            <p>It&apos;s simple! Just click Login in the top-right. Then, select your Google account. You should be redirected back to this page.</p>
           </div>
 
           <hr></hr>
