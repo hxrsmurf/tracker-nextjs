@@ -1,6 +1,7 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
-import { unstable_getServerSession } from "next-auth/next";
 import { stringify, v4 as uuidv4 } from "uuid";
+
+import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
 const client = new DynamoDB({
@@ -25,9 +26,9 @@ export default async function handler(req, res) {
     const data = req.query.data;
     const type = req.query.type;
     const unique_id = uuidv4();
-    const now_date = new Date().toISOString()
-    const save_date = now_date.split('T')[0]
-    const save_time = now_date.split('T')[1]
+    const now_date = new Date().toISOString();
+    const save_date = now_date.split("T")[0];
+    const save_time = now_date.split("T")[1];
 
     client.putItem(
       {
@@ -37,14 +38,14 @@ export default async function handler(req, res) {
             S: user,
           },
           epoch: {
-            S: Date.now().toString()
+            S: Date.now().toString(),
           },
           type: {
-            S: type
+            S: type,
           },
           category: {
             S: data,
-          }
+          },
         },
       },
       function (err, data) {
@@ -57,14 +58,13 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "GET") {
+    const user = req.query.user;
+    const ref = req.query.ref;
 
-    const user = req.query.user
-    const ref = req.query.ref
-
-    if (ref == 'list') {
-      var table = process.env.TABLE_USER
+    if (ref == "list") {
+      var table = process.env.TABLE_USER;
     } else {
-      var table = process.env.TABLE_NAME
+      var table = process.env.TABLE_NAME;
     }
 
     client.query(
