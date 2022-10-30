@@ -1,22 +1,18 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  Divider,
-  Fab,
-  List,
-  ListItem,
-  ListItemText,
-  Modal,
-  Typography,
-} from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import AddIcon from "@mui/icons-material/Add";
+import Divider from "@mui/material/Divider";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Fab from "@mui/material/Fab";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+
 import AddCategory from "./Forms/AddCategory";
-import { ExpandMore } from "@mui/icons-material";
 
 export default function Settings() {
   const { data: session } = useSession();

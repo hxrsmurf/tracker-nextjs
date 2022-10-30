@@ -10,23 +10,27 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function ListCategory({ session, type }) {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState();
+//  "/api/db/DBUserProfile?ref=list&user=" + session.user.email
+
+export default function MenuItems({ session, type }) {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   const router = useRouter()
 
   useEffect(() => {
     setLoading(true);
-    const fetchData = async () => {
-      const req = await fetch("/api/db/DBUserProfile?ref=list&user=" + session.user.email);
-      const res = await req.json();
-      setData(res);
-    };
-    fetchData();
-  }, []);
+    if (session.user) {
+      fetch("/api/db/DBUserProfile?ref=list&user=" + session.user.email)
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data);
+          setLoading(false);
+        });
+    }
+  }, [session]);
 
-  if (!data) return <p>Loading...</p>;
-
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No profile data</p>;
 
   const handleCategoryClick = (event) => {
     router.push("/categories/" + event.target.textContent);

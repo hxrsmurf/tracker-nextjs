@@ -1,49 +1,25 @@
 import { Grid } from "@mui/material";
-import Button from "@mui/material/Button";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import CategoryListing from "./CategoryListing";
+import AccountMenu from "./AccountMenu";
 import LoginButton from "./LoginButton";
+import MenuItems from "./MenuItems";
 
 export default function Navigation() {
   const { data: session } = useSession();
-  const router = useRouter();
-
-  if (!session) {
-    return (
-      <Grid container justifyContent="space-between">
+  return (
+    <>
+      <Grid container spacing={2}>
+      {!session ? <></> : <MenuItems session={session}/>}
         <Grid item>
-          <Button variant="contained" onClick={() => router.push("/")}>
-            Dashboard
-          </Button>
+          <LoginButton session={session} />
         </Grid>
-        <Grid item>
-          <LoginButton />
-        </Grid>
+        {!session ? <></> :
+        <>
+          <Grid item>
+            <AccountMenu session={session}/>
+          </Grid>
+        </>}
       </Grid>
-    );
-  } else if (!session.user) return <>Loading...</>;
-  else {
-    return (
-      <div>
-        <Grid container justifyContent="space-between">
-          <Grid item>
-            <Button
-              variant="contained"
-              style={{ marginRight: "1rem" }}
-              onClick={() => router.push("/")}
-            >
-              Dashboard
-            </Button>
-          </Grid>
-
-          <CategoryListing session={session} />
-
-          <Grid item>
-            <LoginButton session={session} />
-          </Grid>
-        </Grid>
-      </div>
-    );
-  }
+    </>
+  );
 }

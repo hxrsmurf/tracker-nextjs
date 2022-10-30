@@ -13,7 +13,7 @@ export default function ListMovies({ session, type }) {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const req = await fetch("/api/dynamodb?user=" + session.user.email);
+      const req = await fetch("/api/db/DBUserProfile?user=" + session.user.email);
       const res = await req.json();
       setData(res);
     };
