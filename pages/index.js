@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-      <div style={{ marginTop: "2rem" }}>
+      <div className="content" style={{ marginTop: "2rem"}} >
         <div>
           <h1>Why?</h1>
           <div>
@@ -28,23 +28,6 @@ export default function Home() {
           <div>
             It&apos;s simple! Just click Login in the top-right. Then, select
             your Google account. You should be redirected back to this page.
-          </div>
-        </div>
-
-        <hr style={{ marginTop: "2rem" }}></hr>
-
-        <div>
-          <h1>Data Collected</h1>
-          <div>
-            If you sign-in with Google, the below information will be stored in
-            the database.
-            <ul>
-              <li>Email</li>
-              <li>First and Last Name</li>
-              <li>Profile Picture</li>
-            </ul>
-            Apart from the third-party that hosts the database, your data will
-            not be transferred to any other third-parties.
           </div>
         </div>
       </div>
