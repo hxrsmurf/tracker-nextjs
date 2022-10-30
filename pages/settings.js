@@ -5,6 +5,7 @@ import Settings from "../Components/Settings";
 export default function profile() {
   const { data: session } = useSession();
   const router = useRouter();
+
   if (!session) {
     router.push("/");
     return <>Loading...</>;
