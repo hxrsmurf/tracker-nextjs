@@ -1,7 +1,11 @@
-import { Button, Modal, TextField, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Box from "@mui/system/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const style = {
   position: "absolute",
