@@ -8,6 +8,7 @@ import { SessionProvider } from "next-auth/react";
 import Container from "@mui/material/Container";
 
 import Navigation from "../Components/Navigation";
+import Footer from "../Components/Footer";
 
 function MyApp({ Component, pageProps: session, ...pageProps }) {
   return (
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps: session, ...pageProps }) {
       <Container style={{ marginTop: "2rem" }}>
         <Navigation />
         <Component {...pageProps} style={{ marginTop: "2rem" }} />
+        <Footer />
       </Container>
     </SessionProvider>
   );

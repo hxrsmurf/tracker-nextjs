@@ -19,13 +19,15 @@ export default function categoryPage() {
 
   return (
     <>
-      <div>Category: {category}</div>
+      <div className="content">
+        <div>Category: {category}</div>
 
-      <div>
-        <Form type={category} user={session.user.email} />
+        <div>
+          <Form type={category} user={session.user.email} />
+        </div>
+
+        <ListCategories session={session} type={category} />
       </div>
-
-      <ListCategories session={session} type={category} />
     </>
   );
 }
