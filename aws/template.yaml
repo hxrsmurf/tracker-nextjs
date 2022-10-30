@@ -41,4 +41,6 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: 'dynamodb:*'
-                Resource: !GetAtt Table.Arn
+                Resource:
+                    - !GetAtt Table.Arn
+                    - !GetAtt TableUser.Arn
