@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export default function ListMovies({ session }) {
+export default function ListMovies({ session, type }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
@@ -22,7 +22,9 @@ export default function ListMovies({ session }) {
 
   if (!data) return <p>Loading...</p>;
 
-  const sorted_data = data.sort(function(a,b) { return b.epoch - a.epoch})
+  const sorted_data = data.sort(function (a, b) {
+    return b.epoch - a.epoch;
+  });
 
   return (
     <>
@@ -35,13 +37,17 @@ export default function ListMovies({ session }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {sorted_data.map((result, id) => (
-            <TableRow key={id}>
-              <TableCell>{result.data.S}</TableCell>
-              <TableCell>{result.type.S}</TableCell>
-              <TableCell>{result.date_utc.S}</TableCell>
-            </TableRow>
-          ))}
+          {sorted_data
+            .filter(function (result) {
+              return result.type.S == type;
+            })
+            .map((result, id) => (
+              <TableRow key={id}>
+                <TableCell>{result.data.S}</TableCell>
+                <TableCell>{result.type.S}</TableCell>
+                <TableCell>{result.date_utc.S}</TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </>

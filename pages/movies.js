@@ -18,7 +18,7 @@ export default function movies(props) {
       </div>
 
       <div>Movies</div>
-      <ListMovies session={session} />
+      <ListMovies session={session} type="movie"/>
     </>
   );
 }
