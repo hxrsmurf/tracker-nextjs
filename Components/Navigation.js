@@ -22,34 +22,28 @@ export default function Navigation() {
         </Grid>
       </Grid>
     );
+  } else if (!session.user) return <>Loading...</>;
+  else {
+    return (
+      <div>
+        <Grid container justifyContent="space-between">
+          <Grid item>
+            <Button
+              variant="contained"
+              style={{ marginRight: "1rem" }}
+              onClick={() => router.push("/")}
+            >
+              Dashboard
+            </Button>
+          </Grid>
+
+          <CategoryListing session={session} />
+
+          <Grid item>
+            <LoginButton session={session} />
+          </Grid>
+        </Grid>
+      </div>
+    );
   }
-
-  if (!session.user) return <>Loading...</>;
-
-  return (
-    <div>
-      <Grid container justifyContent="space-between">
-        <Grid item>
-          <Button
-            variant="contained"
-            style={{ marginRight: "1rem" }}
-            onClick={() => router.push("/")}
-          >
-            Dashboard
-          </Button>
-        </Grid>
-
-        {!session ? (
-          <></>
-        ) : (
-          <>
-            <CategoryListing session={session}/>
-          </>
-        )}
-        <Grid item>
-          <LoginButton session={session} />
-        </Grid>
-      </Grid>
-    </div>
-  );
 }
