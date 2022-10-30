@@ -2,9 +2,12 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function BasicTextFields({ type, user }) {
   const [data, setData] = useState();
+  const router = useRouter()
+
   const handleSubmit = (event) => {
     async function submit(event) {
         const data_user = "user=" + user
@@ -12,7 +15,9 @@ export default function BasicTextFields({ type, user }) {
         const data_type = "&type=" + type
         const res = await fetch("/api/dynamodb?" + data_user + data_event + data_type, { method: 'PUT'})
         const resp = await res.json()
-        console.log(resp)
+
+        // Not the best way, but hey it works. I think there's a callback I could do
+        router.reload()
     }
     submit(event)
   };
