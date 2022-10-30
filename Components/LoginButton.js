@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import { signIn, signOut } from "next-auth/react";
+import Button from "@mui/material/Button";
+import { signIn } from "next-auth/react";
 
 export default function LoginButton({ session }) {
   if (!session)
