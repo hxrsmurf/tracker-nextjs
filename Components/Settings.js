@@ -1,5 +1,7 @@
+import { Button, Fab } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function Settings() {
   const { data: session } = useSession();
@@ -21,5 +23,21 @@ export default function Settings() {
 
   if (!data) return <>Loading...</>;
 
-  return <>Settings page...</>;
+  return (
+    <>
+      <div style={{ marginTop: "2rem" }}>
+        <div>
+          Categories
+          <Fab size="small" color="primary" style={{ marginLeft: "1rem" }}>
+            <AddIcon />
+          </Fab>
+        </div>
+        <ul>
+          {data.map((d, id) => {
+            <li>{d.catagories.S}</li>;
+          })}
+        </ul>
+      </div>
+    </>
+  );
 }
