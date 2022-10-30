@@ -14,7 +14,7 @@ export default function CategoryListing() {
   useEffect(() => {
     const fetchData = async () => {
       const req = await fetch(
-        "/api/db/DBUserProfile?user=" + session.user.email
+        "/api/db/DBUserProfile?ref=list&user=" + session.user.email
       );
       const res = await req.json();
       setData(res);
@@ -25,7 +25,7 @@ export default function CategoryListing() {
   if (!data) return <>Loading...</>;
 
   const handleCategoryClick = (event) => {
-    router.push("/" + event.target.textContent);
+    router.push("/categories/" + event.target.textContent);
   };
 
   return (
