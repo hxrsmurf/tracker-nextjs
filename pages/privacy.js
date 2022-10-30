@@ -7,7 +7,7 @@ export default function privacy() {
           This website (website, we or us) is committed to protecting your
           privacy. This Privacy Policy explains the methods and reasons we
           collect, use, disclose, transfer, and store your information. If you
-          have any questions about the contents of this policy, don't hesitate
+          have any questions about the contents of this policy, don&apos;t hesitate
           to contact us. If you do not consent to the collection and use of
           information from or about you in accordance with this Privacy Policy,
           then you are not permitted to use this website or any services
@@ -63,7 +63,7 @@ export default function privacy() {
         <hr style={{ marginTop: "2rem" }}></hr>
         <div>
           <h3>Children and COPPA</h3>
-          This website is committed to complying with the Children's Online
+          This website is committed to complying with the Children&apos;s Online
           Privacy Protection Act (COPPA). We do not use our services to
           intentionally solicit data from or market to children under the age of
           13. We encourage parents and guardians to report any suspicions that a
