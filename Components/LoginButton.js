@@ -1,9 +1,8 @@
 import { Button } from "@mui/material";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import AccountMenu from "./AccountMenu";
 
-export default function LoginButton() {
-  const { data: session } = useSession()
+export default function LoginButton({session}) {
 
   if (!session) return <Button variant="contained" onClick={() => signIn()}>Login</Button>
 
