@@ -20,7 +20,7 @@ export default function profile() {
         <p>
           Settings for {session.user.name} | {session.user.email}
         </p>
-        <p>You'll have to refresh the page to see new categories.</p>
+        <p>You&apos;ll have to refresh the page to see new categories.</p>
       </div>
       <Settings />
     </>
