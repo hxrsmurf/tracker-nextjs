@@ -16,7 +16,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import AddCategory from "./Forms/AddCategory";
-import { ExpandMore } from "@mui/icons-material";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 export default function Settings() {
   const { data: session } = useSession();
