@@ -31,10 +31,9 @@ export default function MenuItems({ session, type }) {
   return (
     <>
       {data.map((data, id) => (
-        <Grid item key={id}>
+        <Grid item key={id} style={{ marginLeft: "1rem" }}>
           <Button
             variant="contained"
-            style={{ marginRight: "1rem" }}
             onClick={(event) => handleCategoryClick(event)}
           >
             {data.category.S}
