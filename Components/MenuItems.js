@@ -31,14 +31,22 @@ export default function MenuItems({ session, type }) {
   return (
     <>
       {data.map((data, id) => (
-        <Grid item key={id} style={{ marginLeft: "1rem" }}>
-          <Button
-            variant="contained"
-            onClick={(event) => handleCategoryClick(event)}
-          >
-            {data.category.S}
-          </Button>
-        </Grid>
+        <>
+          {data.type.S == "category" ? (
+            <>
+              <Grid item key={id} style={{ marginLeft: "1rem" }}>
+                <Button
+                  variant="contained"
+                  onClick={(event) => handleCategoryClick(event)}
+                >
+                  {data.category.S}
+                </Button>
+              </Grid>
+            </>
+          ) : (
+            <></>
+          )}
+        </>
       ))}
     </>
   );
