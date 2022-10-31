@@ -23,7 +23,7 @@ export default function Navigation() {
         </Grid>
         {!session ? <></> :
         <>
-          <Grid item>
+          <Grid item style={{marginLeft: 'auto'}}>
             <AccountMenu session={session}/>
           </Grid>
         </>}
