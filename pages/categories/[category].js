@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Form from "../../Components/Form";
 import ListCategories from "../../Components/ListCategories";
 
-export default function categoryPage() {
+export default function CategoryPage() {
   const router = useRouter();
   const { data: session } = useSession();
   const { category } = router.query;
