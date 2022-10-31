@@ -10,6 +10,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import AddSetting from "./Forms/AddSetting";
 
 export default function Accordian({ type }) {
   const { data: session } = useSession();
@@ -31,8 +32,22 @@ export default function Accordian({ type }) {
 
   if (!session) return <>Loading...</>;
 
+  const handleShowFormModal = () => {
+    setShowFormModal(true);
+  };
+
+  const handleHideFormModal = () => {
+    setShowFormModal(false);
+  };
+
   return (
     <div style={{ marginTop: "2rem" }}>
+      <AddSetting
+        show={showFormModal}
+        handleHideFormModal={handleHideFormModal}
+        type={type}
+      />
+
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <div>{type}</div>
@@ -42,7 +57,7 @@ export default function Accordian({ type }) {
             size="small"
             color="primary"
             style={{ marginLeft: "1rem" }}
-            //onClick={handleShowFormModal}
+            onClick={handleShowFormModal}
             variant="extended"
           >
             <AddIcon sx={{ mr: 1 }} />
