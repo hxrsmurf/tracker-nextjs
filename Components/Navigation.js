@@ -18,7 +18,7 @@ export default function Navigation() {
         <Button variant="contained" onClick={() => router.push('/')}>Dashboard</Button>
       </Grid>
       {!session ? <></> : <MenuItems session={session}/>}
-        <Grid item>
+        <Grid item style={{marginLeft: "1rem"}}>
           <LoginButton session={session} />
         </Grid>
         {!session ? <></> :
