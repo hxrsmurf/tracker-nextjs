@@ -1,8 +1,9 @@
-import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import { DynamoDB, QueryCommand } from "@aws-sdk/client-dynamodb";
 import { stringify, v4 as uuidv4 } from "uuid";
 
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
+import { useState } from "react";
 
 const client = new DynamoDB({
   credentials: {
@@ -16,9 +17,8 @@ export default async function handler(req, res) {
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {
-    return res.send({
-      content: "Not authorized",
-    });
+    res.status(401).json({ message: "You must be logged in." });
+    return;
   }
 
   if (req.method === "PUT") {
@@ -57,6 +57,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ status: "success" });
   }
 
+  // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/index.html
   if (req.method === "GET") {
     const user = req.query.user;
     const ref = req.query.ref;
@@ -67,21 +68,18 @@ export default async function handler(req, res) {
       var table = process.env.TABLE_NAME;
     }
 
-    client.query(
-      {
-        TableName: table,
-        ScanIndexForward: false,
-        KeyConditionExpression: "email = :value",
-        ExpressionAttributeValues: {
-          ":value": {
-            S: user,
-          },
+    const params = {
+      TableName: table,
+      ScanIndexForward: false,
+      KeyConditionExpression: "email = :value",
+      ExpressionAttributeValues: {
+        ":value": {
+          S: user,
         },
       },
-      function (err, data) {
-        if (err) console.log(err, err.stack);
-        else return res.status(200).json(data.Items);
-      }
-    );
+    };
+    const command = new QueryCommand(params);
+    const data = await client.send(command);
+    return res.json(data.Items);
   }
 }
