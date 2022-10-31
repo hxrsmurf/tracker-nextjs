@@ -20,7 +20,6 @@ export default function AccountMenu({ session }) {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(event);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -28,6 +27,7 @@ export default function AccountMenu({ session }) {
 
   const handleClickSettings = () => {
     router.push("/settings");
+    setAnchorEl(null);
   };
 
   return (
