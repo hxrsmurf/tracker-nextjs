@@ -1,4 +1,3 @@
-// It was the icons...
 import Logout from "@mui/icons-material/Logout";
 import SettingsIcon from "@mui/icons-material/Settings";
 
@@ -12,12 +11,12 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function AccountMenu({ session }) {
-  if (!session) return <>Loading Account Menu...</>;
-  if (!session.user) return <>Loading Account Menu User...</>;
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
+
+  if (!session) return <>Loading Account Menu...</>;
+  if (!session.user) return <>Loading Account Menu User...</>;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
