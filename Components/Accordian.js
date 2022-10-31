@@ -9,9 +9,13 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Accordian({ type }) {
-  const data = [];
+  const { data: session } = useSession();
+  const [data, setData] = useState();
+  const [showFormModal, setShowFormModal] = useState(false);
+
   const [url, setUrl] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,13 +24,18 @@ export default function Accordian({ type }) {
     setLoading(false);
   }
 
+  if (loading && !data) {
+    setData(null);
+    setLoading(false);
+  }
+
+  if (!session) return <>Loading...</>;
+
   return (
-    <div style={{marginTop: "2rem"}}>
+    <div style={{ marginTop: "2rem" }}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <div>
-            {type}
-          </div>
+          <div>{type}</div>
         </AccordionSummary>
         <AccordionDetails>
           <Fab
@@ -40,14 +49,20 @@ export default function Accordian({ type }) {
             <div style={{ marginRight: "1rem" }}>Add</div>
           </Fab>
           <List>
-            {data.map((d, id) => (
+            {!data ? (
+              <></>
+            ) : (
               <>
-                <ListItem key={id}>
-                  <ListItemText>{d.category.S}</ListItemText>
-                </ListItem>
-                <Divider></Divider>
+                {data.map((d, id) => (
+                  <>
+                    <ListItem key={id}>
+                      <ListItemText>{d.category.S}</ListItemText>
+                    </ListItem>
+                    <Divider></Divider>
+                  </>
+                ))}
               </>
-            ))}
+            )}
           </List>
         </AccordionDetails>
       </Accordion>
