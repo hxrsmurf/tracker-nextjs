@@ -61,7 +61,7 @@ export default function Accordian({ type }) {
 
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <div>{type}</div>
+          <div style={{ textTransform: "uppercase" }}> {type}</div>
         </AccordionSummary>
         <AccordionDetails>
           <Fab
