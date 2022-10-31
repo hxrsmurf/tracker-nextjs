@@ -16,6 +16,7 @@ export default function Accordian({ type }) {
   const { data: session } = useSession();
   const [data, setData] = useState();
   const [showFormModal, setShowFormModal] = useState(false);
+  const [countMobile, setCountMobile] = useState(null);
 
   const [url, setUrl] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,10 +32,21 @@ export default function Accordian({ type }) {
     fetchData();
   }, [showFormModal]);
 
-  if (loading && type === "Mobile Number") {
-    setUrl(type);
-    setLoading(false);
-  }
+  useEffect(() => {
+    // Counts mobile number. If more than 1, then do not allow add another.
+    if (data) {
+      let counter = 0;
+      if (type === "Mobile Number") {
+        for (let d of data) {
+          if (d.type.S === "Mobile Number") {
+            console.log(d.type.S);
+            counter++;
+          }
+        }
+      }
+      setCountMobile(counter);
+    }
+  }, [data]);
 
   if (!data) {
     return <>Loading data from Accordian...</>;
@@ -61,19 +73,29 @@ export default function Accordian({ type }) {
 
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <div style={{ textTransform: "uppercase" }}> {type}</div>
+          <div style={{ textTransform: "uppercase" }}>
+            {" "}
+            {type} - {countMobile}
+          </div>
         </AccordionSummary>
         <AccordionDetails>
-          <Fab
-            size="small"
-            color="primary"
-            style={{ marginLeft: "1rem" }}
-            onClick={handleShowFormModal}
-            variant="extended"
-          >
-            <AddIcon sx={{ mr: 1 }} />
-            <div style={{ marginRight: "1rem" }}>Add</div>
-          </Fab>
+          {countMobile >= 1 && type == "Mobile Number" ? (
+            <></>
+          ) : (
+            <>
+              <Fab
+                size="small"
+                color="primary"
+                style={{ marginLeft: "1rem" }}
+                onClick={handleShowFormModal}
+                variant="extended"
+              >
+                <AddIcon sx={{ mr: 1 }} />
+                <div style={{ marginRight: "1rem" }}>Add</div>
+              </Fab>
+            </>
+          )}
+
           <List>
             {!data ? (
               <></>
