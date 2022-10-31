@@ -16,8 +16,6 @@ import AddCategory from "./Forms/AddCategory";
 
 export default function Settings() {
   const { data: session } = useSession();
-  if (!session) return <>Loading...</>;
-
   const [data, setData] = useState();
   const [showFormModal, setShowFormModal] = useState(false);
 
@@ -31,6 +29,8 @@ export default function Settings() {
     };
     fetchData();
   }, [showFormModal]);
+
+  if (!session) return <>Loading...</>;
 
   if (!data) return <>Loading...</>;
 
