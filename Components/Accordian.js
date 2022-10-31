@@ -8,7 +8,7 @@ import Fab from "@mui/material/Fab";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import AddSetting from "./Forms/AddSetting";
 
@@ -20,13 +20,24 @@ export default function Accordian({ type }) {
   const [url, setUrl] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const req = await fetch(
+        "/api/db/DBUserProfile?ref=list&user=" + session.user.email
+      );
+      const res = await req.json();
+      setData(res);
+    };
+    fetchData();
+  }, [showFormModal]);
+
   if (loading && type === "Mobile Number") {
     setUrl(type);
     setLoading(false);
   }
 
-  if (loading && !data) {
-    setData(null);
+  if (!data) {
+    return <>Loading data from Accordian...</>;
     setLoading(false);
   }
 
@@ -70,10 +81,16 @@ export default function Accordian({ type }) {
               <>
                 {data.map((d, id) => (
                   <>
-                    <ListItem key={id}>
-                      <ListItemText>{d.category.S}</ListItemText>
-                    </ListItem>
-                    <Divider></Divider>
+                    {d.type.S == type ? (
+                      <>
+                        <ListItem key={id}>
+                          <ListItemText>{d.category.S}</ListItemText>
+                        </ListItem>
+                        <Divider></Divider>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </>
                 ))}
               </>
