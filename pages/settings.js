@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Settings from "../Components/Settings";
+import Accordian from "../Components/Accordian";
 
 export default function SettingsPage() {
   const { data: session } = useSession();
@@ -23,7 +23,8 @@ export default function SettingsPage() {
           </div>
           <div>You&apos;ll have to refresh the page to see new categories.</div>
         </div>
-        <Settings />
+        <Accordian type='Mobile Number'/>
+        <Accordian type='category'/>
       </div>
     </>
   );
