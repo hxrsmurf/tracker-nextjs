@@ -104,7 +104,7 @@ Resources:
                 Action: 'dynamodb:*'
                 Resource:
                     - !GetAtt TestNextAuthTable.Arn
-                    - !GetAtt TestNextAuthTable.Arn
+                    - !Sub ${TestNextAuthTable.Arn}/*
   TestNextAuthTable:
     Type: "AWS::DynamoDB::Table"
     Properties:
