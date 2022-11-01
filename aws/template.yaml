@@ -91,3 +91,48 @@ Resources:
                 Resource:
                     - !GetAtt TestTable.Arn
                     - !GetAtt TestTableUser.Arn
+
+  TestUserNextAuth:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Policies:
+        - PolicyName: DynamoDB
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'dynamodb:*'
+                Resource:
+                    - !GetAtt TestNextAuthTable.Arn
+                    - !GetAtt TestNextAuthTable.Arn
+  TestNextAuthTable:
+    Type: "AWS::DynamoDB::Table"
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      TableName: test-tracking-next-auth
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+        - AttributeName: sk
+          AttributeType: S
+        - AttributeName: GSI1PK
+          AttributeType: S
+        - AttributeName: GSI1SK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: GSI1
+          Projection:
+            ProjectionType: ALL
+          KeySchema:
+            - AttributeName: GSI1PK
+              KeyType: HASH
+            - AttributeName: GSI1SK
+              KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: expires
+        Enabled: true
