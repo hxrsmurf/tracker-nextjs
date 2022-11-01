@@ -40,6 +40,12 @@ export const authOptions = {
     client,
     {tableName: process.env.NEXT_AUTH_AWS_TABLE}
   ),
+  callbacks: {
+    async session({session, token, user}){
+      session.id = user.id
+      return session
+    }
+  }
 };
 
 export default NextAuth(authOptions);
