@@ -32,6 +32,7 @@ export const authOptions = {
     SpotifyProvider({
       clientId: process.env.SPOTIFY_ID,
       clientSecret: process.env.SPOTIFY_SECRET,
+      authorization: {params: {scope: "user-read-private user-read-recently-played user-read-currently-playing user-top-read"}},
     }),
     // ...add more providers here
   ],
@@ -39,6 +40,12 @@ export const authOptions = {
     client,
     {tableName: process.env.NEXT_AUTH_AWS_TABLE}
   ),
+  callbacks: {
+    async session({session, token, user}){
+      session.id = user.id
+      return session
+    }
+  }
 };
 
 export default NextAuth(authOptions);
