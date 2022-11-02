@@ -12,6 +12,7 @@ export default function NowPlaying() {
     const [items, setItems] = useState()
     const [loading, setLoading] = useState(true)
     const [accordionOpen, setAccordionOpen] = useState(true)
+
     useEffect(() => {
         const get_recently_played = async () => {
             const req = await fetch('/api/spotify/now-playing')
