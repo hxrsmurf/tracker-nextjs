@@ -25,7 +25,11 @@ export default function MenuItems({ session, type }) {
   if (!data) return <p>No profile data</p>;
 
   const handleCategoryClick = (event) => {
-    router.push("/categories/" + event.target.textContent);
+    if (event.target.textContent == 'spotify') {
+      router.push('/' + event.target.textContent)
+    } else {
+      router.push("/categories/" + event.target.textContent)
+    }
   };
 
   return (

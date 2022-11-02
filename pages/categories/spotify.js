@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function spotify() {
+export default function Spotify() {
     const { data: session } = useSession();
     const router = useRouter();
     const [accessToken, setAccessToken] = useState()
