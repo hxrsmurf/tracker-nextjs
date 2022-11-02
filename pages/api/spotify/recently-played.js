@@ -3,6 +3,8 @@ import { authOptions } from '../auth/[...nextauth]'
 
 var SpotifyWebApi = require('spotify-web-api-node');
 
+// https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recently-played
+
 export default async function handler(req, res) {
     const session = await unstable_getServerSession(req, res, authOptions)
     const limit = req.query.limit
