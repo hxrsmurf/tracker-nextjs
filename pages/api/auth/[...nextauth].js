@@ -66,7 +66,7 @@ async function generateDBParameter(id) {
     data.Items.map((d, id) => {
       { d.refresh_token ? refresh_token = d.refresh_token.S : null }
       { d.access_token ? access_token = d.access_token.S : null }
-      { d.expires_at ? expires_at = d.expires_at.N : null }
+      { d.expires_at ? expires_at = d.expires_at.S : null }
       { d.sk ? sort_key = d.sk : null }
       { d.pk ? partition_key = d.pk : null }
     })

@@ -20,8 +20,8 @@ export default function spotify() {
             fetch('/api/db/AuthDb?id=' + user_id)
                 .then((res) => res.json())
                 .then((data) => {
-                    setAccessToken(data.accessToken.S);
-                    setRefreshToken(data.refreshToken.S)
+                    setAccessToken(session.tokens.access_token);
+                    setRefreshToken(session.tokens.refresh_token)
                     setLoading(false);
                 });
         }
