@@ -11,12 +11,16 @@ import ListItemText from "@mui/material/ListItemText";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import AddSetting from "./Forms/AddSetting";
+import { useRouter } from "next/router";
 
 export default function Accordian({ type }) {
   const { data: session } = useSession();
   const [data, setData] = useState();
   const [showFormModal, setShowFormModal] = useState(false);
   const [countMobile, setCountMobile] = useState(null);
+  const [countApiKey, setCountApiKey] = useState(null)
+  const [reload, setReload] = useState(false)
+  const router = useRouter()
 
   const [url, setUrl] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,20 +34,26 @@ export default function Accordian({ type }) {
       setData(res);
     };
     fetchData();
-  }, [showFormModal]);
+  }, [showFormModal, reload]);
 
   useEffect(() => {
     // Counts mobile number. If more than 1, then do not allow add another.
     if (data) {
       let counter = 0;
-      if (type === "Mobile Number") {
+      let api_key_counter = 0;
+      if (type === "Mobile Number" || type === "key") {
         for (let d of data) {
           if (d.type.S === "Mobile Number") {
             console.log(d.type.S);
             counter++;
           }
+
+          if (d.type.S === "key") {
+            api_key_counter++
+          }
         }
       }
+      setCountApiKey(api_key_counter)
       setCountMobile(counter);
     }
   }, [data]);
@@ -70,6 +80,8 @@ export default function Accordian({ type }) {
       console.log(resp)
     }
     submitData()
+    setReload(true)
+    router.reload()
   }
 
   return (
@@ -83,11 +95,11 @@ export default function Accordian({ type }) {
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <div style={{ textTransform: "uppercase" }}>
-            {type} - {countMobile}
+            {type}
           </div>
         </AccordionSummary>
         <AccordionDetails>
-          {countMobile >= 1 && type == "Mobile Number" ? (
+          {(countMobile >= 1 && type == "Mobile Number") || (countApiKey >= 5 && type === "key") ? (
             <></>
           ) : (
             <>
