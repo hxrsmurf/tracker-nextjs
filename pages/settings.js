@@ -24,6 +24,7 @@ export default function SettingsPage() {
           <div>You&apos;ll have to refresh the page to see new categories.</div>
         </div>
         <Accordian type='Mobile Number'/>
+        <Accordian type='key'/>
         <Accordian type='category'/>
       </div>
     </>
