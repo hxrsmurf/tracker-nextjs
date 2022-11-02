@@ -22,7 +22,7 @@ export default function NowPlaying() {
         get_recently_played()
     }, [])
 
-    if (!items) return <>Loading Recently Played...</>
+    if (!items) return <></>
 
     const handleCloseAccordion = () => {
         setAccordionOpen(accordionOpen ? false : true)

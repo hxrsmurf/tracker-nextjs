@@ -7,6 +7,9 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 export default function RecentlyPlayed() {
     const [items, setItems] = useState()
     const [loadingRecentlyPlayed, setLoadingRecentlyPlayed] = useState(true)
@@ -20,12 +23,12 @@ export default function RecentlyPlayed() {
         get_recently_played()
     }, [])
 
-    if (!items) return <>Loading Recently Played...</>
+    if (!items) return <></>
 
     return (
         <>
             <Accordion style={{ marginTop: "2rem" }}>
-                <AccordionSummary style={{ fontWeight: "bold" }}>Recently Played</AccordionSummary>
+                <AccordionSummary style={{ fontWeight: "bold" }}  expandIcon={<ExpandMoreIcon/>}>Recently Played</AccordionSummary>
                 <AccordionDetails>
                     <Table>
                         <TableHead>
