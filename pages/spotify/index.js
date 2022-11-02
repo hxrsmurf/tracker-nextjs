@@ -1,7 +1,8 @@
 import { useSession } from "next-auth/react"
+import NowPlaying from "../../Components/Spotify/NowPlaying"
 import RecentlyPlayed from '../../Components/Spotify/RecentlyPlayed'
 
-export default function index() {
+export default function Index() {
     const { data: session } = useSession()
 
     if (!session) return <>Loading session...</>
@@ -11,6 +12,7 @@ export default function index() {
         <>
             <div className="content">
                 {session.user.email}
+                <NowPlaying/>
                 <RecentlyPlayed/>
             </div>
         </>
