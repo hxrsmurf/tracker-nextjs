@@ -40,8 +40,6 @@ export default async function handler(req, res) {
     const refresh_token = data.Items[2]['refresh_token']
     const current_epoch = Date.now() / 1000
 
-    console.log(access_token, refresh_token)
-
     if (expires_at > current_epoch) {
       console.log('Expired Access Token')
     }
