@@ -63,6 +63,15 @@ export default function Accordian({ type }) {
     setShowFormModal(false);
   };
 
+  const handleAPIKey = () => {
+    const submitData = async () => {
+      const req = await fetch('/api/generateKey?user=' + session.user.email)
+      const resp = await req.json()
+      console.log(resp)
+    }
+    submitData()
+  }
+
   return (
     <div style={{ marginTop: "2rem" }}>
       <AddSetting
@@ -74,7 +83,6 @@ export default function Accordian({ type }) {
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <div style={{ textTransform: "uppercase" }}>
-            {" "}
             {type} - {countMobile}
           </div>
         </AccordionSummary>
@@ -87,7 +95,7 @@ export default function Accordian({ type }) {
                 size="small"
                 color="primary"
                 style={{ marginLeft: "1rem" }}
-                onClick={handleShowFormModal}
+                onClick={type == "key" ? handleAPIKey : handleShowFormModal}
                 variant="extended"
               >
                 <AddIcon sx={{ mr: 1 }} />
