@@ -4,7 +4,8 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [
-      'i.scdn.co'
+      'i.scdn.co',
+      'seeded-session-images.scdn.co'
     ]
   }
 }
