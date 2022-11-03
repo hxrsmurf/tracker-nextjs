@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function NowPlaying() {
     const [items, setItems] = useState()
+    const [playlist, setPlaylist] = useState()
     const [loading, setLoading] = useState(true)
     const [accordionOpen, setAccordionOpen] = useState(true)
 
@@ -17,6 +18,7 @@ export default function NowPlaying() {
         const get_recently_played = async () => {
             const req = await fetch('/api/spotify/now-playing')
             const res = await req.json()
+            setPlaylist(res.playlist)
             setItems(res.items)
             setLoading(false)
         }
@@ -34,8 +36,8 @@ export default function NowPlaying() {
             <Accordion expanded={accordionOpen} onClick={() => handleCloseAccordion()}>
                 <AccordionSummary style={{ fontWeight: "bold" }} expandIcon={<ExpandMoreIcon />}>Now Playing</AccordionSummary>
                 <AccordionDetails>
-
                     <Grid>
+                        <Grid item>{playlist.name} <Image width={50} height={50} src={playlist.image} /></Grid>
                         <Grid item style={{ marginBottom: "1rem" }}>
                             {items.name} by {items.artists.length > 1 ? <>{items.artists.map(artist => artist.name + ' ')}</> : <>{items.artists[0].name}</>}
                         </Grid>
