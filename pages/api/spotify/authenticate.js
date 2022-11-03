@@ -6,9 +6,16 @@ var SpotifyWebApi = require('spotify-web-api-node');
 // https://developer.spotify.com/documentation/web-api/reference/#/operations/get-the-users-currently-playing-track
 
 export default async function handler(req, res) {
-    const session = await unstable_getServerSession(req, res, authOptions)
     const api_key = req.query.key
     const email = req.query.email
+
+    var session = null
+
+    if (req.method == 'POST') {
+        session = JSON.parse(req.body)
+    } else {
+        session = await unstable_getServerSession(req, res, authOptions)
+    }
 
     if (!session || !api_key || !email) {
         if (api_key && email) {
