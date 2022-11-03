@@ -13,7 +13,10 @@ export default async function handler(req, res) {
     if (!session || !api_key || !email) {
         if (api_key && email) {
             console.log('Granting access, has API key')
-        } else {
+        } else if (session){
+            console.log('Has session, granting access')
+        }
+        else {
             return res.status(401).send({
                 'message': 'Not authorized because no authentication.'
             })
@@ -42,6 +45,7 @@ export default async function handler(req, res) {
 
     spotifyApi.getMyCurrentPlayingTrack({
     }).then(function (data) {
+        console.log(data)
         return res.send({ 'items': data.body.item })
     }, function (err) {
         console.log('Something went wrong!', err);
