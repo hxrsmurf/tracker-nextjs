@@ -45,7 +45,7 @@ export default async function handler(req, res) {
 
     spotifyApi.getMyCurrentPlayingTrack({
     }).then(function (data) {
-        console.log(data)
+        const playlist_uri = data.body.context.uri
         return res.send({ 'items': data.body.item })
     }, function (err) {
         console.log('Something went wrong!', err);
