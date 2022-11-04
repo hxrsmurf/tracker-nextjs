@@ -1,6 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary, Button, Grid } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function SpotifySettings() {
   const { data: session } = useSession();
@@ -35,11 +36,11 @@ export default function SpotifySettings() {
   }
 
   return (
-    <Accordion>
+    <Accordion style={{ marginTop: "2rem" }}>
       <AccordionSummary>NOW PLAYING</AccordionSummary>
       <AccordionDetails>
         <Grid>
-          <Grid item>{shareId === 'disabled' ? <></> : <>{shareId}</>}</Grid>
+          <Grid item>{shareId === 'disabled' ? <></> : <><Link href={`http://localhost:3000/api/spotify/public/now-playing/${shareId}`}><a>{shareId}</a></Link></>}</Grid>
           <Grid item>{hideButton ? <></> :
             <>
               <Button variant='contained' onClick={() => handleShareClick()}>{shareId === 'disabled' ? <>Enable</> : <>Disable</>} Public Sharing</Button>

@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Accordian from "../Components/Accordian";
+import SpotifySettings from "../Components/Spotify/Settings";
 
 export default function SettingsPage() {
   const { data: session } = useSession();
@@ -26,7 +27,7 @@ export default function SettingsPage() {
         <Accordian type='Mobile Number'/>
         <Accordian type='key'/>
         <Accordian type='category'/>
-        <Accordian type='Now Playing'/>
+        <SpotifySettings/>
       </div>
     </>
   );

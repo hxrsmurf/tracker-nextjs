@@ -46,6 +46,8 @@ Resources:
                 Resource:
                     - !GetAtt Table.Arn
                     - !GetAtt TableUser.Arn
+                    - !Sub ${Table.Arn}/*
+                    - !Sub ${TableUser.Arn}/*
 
 # Test
   TestTable:
@@ -91,6 +93,10 @@ Resources:
                 Resource:
                     - !GetAtt TestTable.Arn
                     - !GetAtt TestTableUser.Arn
+                    - !Sub ${TestTable.Arn}/*
+                    - !Sub ${TestTableUser.Arn}/*
+                    - !GetAtt TestNextAuthTable.Arn
+                    - !Sub ${TestNextAuthTable.Arn}/*
 
   TestUserNextAuth:
     Type: 'AWS::IAM::User'
