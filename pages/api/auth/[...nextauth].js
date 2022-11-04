@@ -101,15 +101,11 @@ async function generateDBParameter(id) {
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
-    }),
     SpotifyProvider({
       clientId: process.env.SPOTIFY_ID,
       clientSecret: process.env.SPOTIFY_SECRET,
       authorization: { params: { scope: "user-read-private user-read-recently-played user-read-currently-playing user-top-read user-read-playback-state" } },
-    }),
+    })
     // ...add more providers here
   ],
   adapter: DynamoDBAdapter(
