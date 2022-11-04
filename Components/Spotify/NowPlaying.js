@@ -37,12 +37,19 @@ export default function NowPlaying() {
                 <AccordionSummary style={{ fontWeight: "bold" }} expandIcon={<ExpandMoreIcon />}>Now Playing</AccordionSummary>
                 <AccordionDetails>
                     <Grid>
-                        <Grid item>{playlist.name} <Image width={50} height={50} src={playlist.image} /></Grid>
-                        <Grid item style={{ marginBottom: "1rem" }}>
-                            {items.name} by {items.artists.length > 1 ? <>{items.artists.map(artist => artist.name + ' ')}</> : <>{items.artists[0].name}</>}
+                        <Grid container spacing={2}>
+                            <Grid item><Image width={250} height={250} src={playlist.image} /></Grid>
+                            <Grid item style={{ marginTop: "3rem", fontSize: "2rem", fontWeight: "bold" }}>{playlist.name}</Grid>
                         </Grid>
-                        <Grid item>
-                            <Image width={300} height={300} src={items.album.images[1].url} />
+
+                        <Grid container style={{ marginTop: "2rem" }} spacing={2}>
+                            <Grid item>
+                                <Image width={300} height={300} src={items.album.images[1].url} />
+                            </Grid>
+
+                            <Grid item style={{ marginTop: "3rem", fontSize: "2rem", fontWeight: "bold" }}>
+                                {items.name} by {items.artists.length > 1 ? <>{items.artists.map(artist => artist.name + ' ')}</> : <>{items.artists[0].name}</>}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </AccordionDetails>
