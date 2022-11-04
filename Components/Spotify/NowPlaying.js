@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function NowPlaying() {
     const [items, setItems] = useState()
+    const [playlist, setPlaylist] = useState()
     const [loading, setLoading] = useState(true)
     const [accordionOpen, setAccordionOpen] = useState(true)
 
@@ -17,6 +18,7 @@ export default function NowPlaying() {
         const get_recently_played = async () => {
             const req = await fetch('/api/spotify/now-playing')
             const res = await req.json()
+            setPlaylist(res.playlist)
             setItems(res.items)
             setLoading(false)
         }
@@ -34,13 +36,20 @@ export default function NowPlaying() {
             <Accordion expanded={accordionOpen} onClick={() => handleCloseAccordion()}>
                 <AccordionSummary style={{ fontWeight: "bold" }} expandIcon={<ExpandMoreIcon />}>Now Playing</AccordionSummary>
                 <AccordionDetails>
-
                     <Grid>
-                        <Grid item style={{ marginBottom: "1rem" }}>
-                            {items.name} by {items.artists.length > 1 ? <>{items.artists.map(artist => artist.name + ' ')}</> : <>{items.artists[0].name}</>}
+                        <Grid container spacing={2}>
+                            <Grid item><Image width={250} height={250} src={playlist.image} /></Grid>
+                            <Grid item style={{ marginTop: "3rem", fontSize: "2rem", fontWeight: "bold" }}>{playlist.name}</Grid>
                         </Grid>
-                        <Grid item>
-                            <Image width={300} height={300} src={items.album.images[1].url} />
+
+                        <Grid container style={{ marginTop: "2rem" }} spacing={2}>
+                            <Grid item>
+                                <Image width={300} height={300} src={items.album.images[1].url} />
+                            </Grid>
+
+                            <Grid item style={{ marginTop: "3rem", fontSize: "2rem", fontWeight: "bold" }}>
+                                {items.name} by {items.artists.length > 1 ? <>{items.artists.map(artist => artist.name + ' ')}</> : <>{items.artists[0].name}</>}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </AccordionDetails>

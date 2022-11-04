@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     if (!session || !api_key || !email) {
         if (api_key && email) {
             console.log('Granting access, has API key')
-        } else if (session){
+        } else if (session) {
             console.log('Has session, granting access')
         }
         else {
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
     var access_token = null
 
-    if (session){
+    if (session) {
         access_token = session.tokens.access_token
     } else {
         // Two options for this:
@@ -44,10 +44,40 @@ export default async function handler(req, res) {
     })
 
     spotifyApi.getMyCurrentPlayingTrack({
-    }).then(function (data) {
-        const playlist_uri = data.body.context.uri
-        return res.send({ 'items': data.body.item })
+    }).then(async function (data) {
+        const playlist_uri = data.body.context.uri.split(':')[2]
+        const playlist_type = data.body.context.type
+
+        var playlist_information = null
+
+        if (playlist_type == 'playlist') {
+            playlist_information = await query_spotify(playlist_uri, playlist_type, access_token)
+        }
+
+        return res.send(
+            {
+                'items': data.body.item,
+                'playlist': playlist_information
+            }
+        )
     }, function (err) {
         console.log('Something went wrong!', err);
     });
+}
+
+const query_spotify = async (uri, type, access_token) => {
+    var spotifyApi = new SpotifyWebApi({ accessToken: access_token })
+    var playlist_name = null
+    var playlist_cover = null
+
+    if (type === 'playlist') {
+        const playlist = await spotifyApi.getPlaylist(uri)
+        playlist_name = playlist.body.name
+        playlist_cover = playlist.body.images[0].url
+    }
+
+    return ({
+        name: playlist_name,
+        image: playlist_cover
+    })
 }
