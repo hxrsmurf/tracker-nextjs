@@ -26,6 +26,7 @@ export default function SettingsPage() {
         <Accordian type='Mobile Number'/>
         <Accordian type='key'/>
         <Accordian type='category'/>
+        <Accordian type='Now Playing'/>
       </div>
     </>
   );
