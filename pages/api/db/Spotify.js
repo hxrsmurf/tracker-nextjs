@@ -1,38 +1,53 @@
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-
-const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 import { stringify, v4 as uuidv4 } from "uuid"
 
-const client = new DynamoDB({
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_KEY,
-    },
-    region: process.env.REGION,
-  });
+import { DynamoDB, PutItemCommand } from "@aws-sdk/client-dynamodb"
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb"
 
+const DynamoDBClientConfig = {
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_KEY,
+    },
+    region: 'us-east-1'
+}
+
+const client = DynamoDBDocument.from(new DynamoDB(DynamoDBClientConfig), {
+    marshallOptions: {
+        convertEmptyValues: true,
+        removeUndefinedValues: true,
+        convertClassInstanceToMap: true,
+    },
+})
+
+// https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/interfaces/putitemcommandinput.html#item
 export default async function handler(req, res) {
     const session = await unstable_getServerSession(req, res, authOptions);
-    // Date.now().toString()
-    console.log(session.user.email)
     const params = {
         TableName: process.env.TABLE_USER,
-        Key: {
-            'email' : {
-                'S': 'kevin'
+        Item: {
+            'email': {
+                'S': session.user.email
             },
-            'epoch' : {
+            'epoch': {
                 'S': 'now_playing_public'
+            },
+            'data' : {
+                'BOOL' : true
+            },
+            'type' : {
+                'S' : 'setting'
             }
-        },
-        UpdateExpression: 'SET category = :category',
-        ExpressionAttributeValues: {
-            ':category': {'S': 'testing'}
         }
     }
 
-    client.updateItem(params).then((data)=> {
-        res.send({message: 'Success'})
-    }).catch
+    const command = new PutItemCommand(params)
+
+    try {
+        const result = await client.send(command)
+        res.send({message: 'Successfully updated!'})
+    } catch (error) {
+        res.send({message: 'Failed to update:' + error})
+    }
 }
