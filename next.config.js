@@ -5,7 +5,8 @@ const nextConfig = {
   images: {
     domains: [
       'i.scdn.co',
-      'seeded-session-images.scdn.co'
+      'seeded-session-images.scdn.co',
+      'mosaic.scdn.co'
     ]
   }
 }
