@@ -37,12 +37,16 @@ export default function NowPlaying() {
                 <AccordionSummary style={{ fontWeight: "bold" }} expandIcon={<ExpandMoreIcon />}>Now Playing</AccordionSummary>
                 <AccordionDetails>
                     <Grid>
-                        <Grid container spacing={2}>
-                            <Grid item><Image width={250} height={250} src={playlist.image} /></Grid>
-                            <Grid item style={{ marginTop: "3rem", fontSize: "2rem", fontWeight: "bold" }}>{playlist.name}</Grid>
-                        </Grid>
-
-                        <Grid container style={{ marginTop: "2rem" }} spacing={2}>
+                        {!playlist ? <></> :
+                            <>
+                                <Grid container spacing={2}>
+                                    <Grid item><Image width={250} height={250} src={playlist.image} /></Grid>
+                                    <Grid item style={{ marginTop: "3rem", fontSize: "2rem", fontWeight: "bold" }}>{playlist.name}</Grid>
+                                </Grid>
+                                <Grid container style={{ marginTop: "2rem" }} spacing={2}></Grid>
+                            </>
+                        }
+                        <Grid container style={playlist ? { marginTop: "2rem" } : { marginTop: "0rem" }} spacing={2}>
                             <Grid item>
                                 <Image width={300} height={300} src={items.album.images[1].url} />
                             </Grid>
