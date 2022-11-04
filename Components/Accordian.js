@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import AddSetting from "./Forms/AddSetting";
 import { useRouter } from "next/router";
+import SpotifySettings from "./Spotify/Settings";
 
 export default function Accordian({ type }) {
   const { data: session } = useSession();
@@ -64,6 +65,14 @@ export default function Accordian({ type }) {
   }
 
   if (!session) return <>Loading...</>;
+
+  if (type === 'Now Playing') {
+    return (
+      <div style={{marginTop: "2rem"}}>
+        <SpotifySettings/>
+      </div>
+    )
+  }
 
   const handleShowFormModal = () => {
     setShowFormModal(true);
