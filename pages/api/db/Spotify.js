@@ -24,32 +24,42 @@ const client = DynamoDBDocument.from(new DynamoDB(DynamoDBClientConfig), {
 // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/interfaces/putitemcommandinput.html#item
 export default async function handler(req, res) {
     const session = await unstable_getServerSession(req, res, authOptions);
-    const uuid = uuidv4().replace(/-/g, "").slice(0,10)
 
-    const params = {
-        TableName: process.env.TABLE_USER,
-        Item: {
-            'email': {
-                'S': session.user.email
-            },
-            'epoch': {
-                'S': 'now_playing_public'
-            },
-            'data' : {
-                'S' : uuid
-            },
-            'type' : {
-                'S' : 'setting'
+    if (req.method == 'PUT') {
+        var uuid = null
+
+        // We actually send a string
+        if (req.body === 'true') {
+            uuid = uuidv4().replace(/-/g, "").slice(0, 10)
+        } else {
+            uuid = 'false'
+        }
+
+        const params = {
+            TableName: process.env.TABLE_USER,
+            Item: {
+                'email': {
+                    'S': session.user.email
+                },
+                'epoch': {
+                    'S': 'now_playing_public'
+                },
+                'data': {
+                    'S': uuid
+                },
+                'type': {
+                    'S': 'setting'
+                }
             }
         }
-    }
 
-    const command = new PutItemCommand(params)
+        const command = new PutItemCommand(params)
 
-    try {
-        const result = await client.send(command)
-        res.send({message: 'Successfully updated!'})
-    } catch (error) {
-        res.send({message: 'Failed to update:' + error})
+        try {
+            const result = await client.send(command)
+            res.send({ message: 'Successfully updated!', share_id: uuid })
+        } catch (error) {
+            res.send({ message: 'Failed to update:' + error })
+        }
     }
 }
