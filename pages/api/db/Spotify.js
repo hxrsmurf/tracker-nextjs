@@ -24,6 +24,8 @@ const client = DynamoDBDocument.from(new DynamoDB(DynamoDBClientConfig), {
 // https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/interfaces/putitemcommandinput.html#item
 export default async function handler(req, res) {
     const session = await unstable_getServerSession(req, res, authOptions);
+    const uuid = uuidv4().replace(/-/g, "").slice(0,10)
+
     const params = {
         TableName: process.env.TABLE_USER,
         Item: {
@@ -34,7 +36,7 @@ export default async function handler(req, res) {
                 'S': 'now_playing_public'
             },
             'data' : {
-                'BOOL' : true
+                'S' : uuid
             },
             'type' : {
                 'S' : 'setting'
