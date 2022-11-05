@@ -1,7 +1,10 @@
+import Announcement from "../Components/Modals/Announcement";
+
 export default function Home() {
   return (
     <>
-      <div className="content" style={{ marginTop: "2rem"}} >
+      <Announcement/>
+      <div className="content" style={{ marginTop: "2rem" }} >
         <div>
           <h1>Why?</h1>
           <div>
