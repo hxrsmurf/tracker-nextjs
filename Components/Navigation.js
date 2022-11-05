@@ -12,22 +12,27 @@ export default function Navigation() {
   const router = useRouter()
 
   return (
-    <>
-      <Grid container spacing={2}>
-      <Grid item>
-        <Button variant="contained" onClick={() => router.push('/')}>Dashboard</Button>
-      </Grid>
-      {!session ? <></> : <MenuItems session={session}/>}
-        <Grid item style={{marginLeft: "1rem"}}>
+    <div>
+      <Grid container spacing={1}>
+        <Grid item>
+          <div>
+            <Button variant="contained" onClick={() => router.push('/')}>Dashboard</Button>
+          </div>
+        </Grid>
+
+        {!session ? <></> : <MenuItems session={session} />}
+
+        <Grid item>
           <LoginButton session={session} />
         </Grid>
+
         {!session ? <></> :
-        <>
-          <Grid item style={{marginLeft: 'auto'}}>
-            <AccountMenu session={session}/>
-          </Grid>
-        </>}
+          <>
+            <Grid item style={{ marginLeft: 'auto' }}>
+              <AccountMenu session={session} />
+            </Grid>
+          </>}
       </Grid>
-    </>
+    </div>
   );
 }

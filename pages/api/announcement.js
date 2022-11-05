@@ -32,7 +32,6 @@ export default async function handler(req, res) {
 
         const command = new UpdateItemCommand(params)
         const data = await client.send(command)
-        console.log(data)
 
         res.send({
             message: 'Acknowledged.'

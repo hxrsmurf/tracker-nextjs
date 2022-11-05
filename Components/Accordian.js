@@ -68,8 +68,8 @@ export default function Accordian({ type }) {
 
   if (type === 'Now Playing') {
     return (
-      <div style={{marginTop: "2rem"}}>
-        <SpotifySettings/>
+      <div style={{ marginTop: "2rem" }}>
+        <SpotifySettings />
       </div>
     )
   }
@@ -131,10 +131,10 @@ export default function Accordian({ type }) {
             ) : (
               <>
                 {data.map((d, id) => (
-                  <>
+                  <div key={id}>
                     {d.type.S == type ? (
                       <>
-                        <ListItem key={id}>
+                        <ListItem>
                           <ListItemText>{d.category.S}</ListItemText>
                         </ListItem>
                         <Divider></Divider>
@@ -142,7 +142,7 @@ export default function Accordian({ type }) {
                     ) : (
                       <></>
                     )}
-                  </>
+                  </div>
                 ))}
               </>
             )}
